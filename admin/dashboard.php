@@ -6,7 +6,7 @@ requireAdmin();
 $page_title = 'Dashboard';
 $active_page = 'dashboard';
 
-// Stats
+
 $total_collections  = $conn->query("SELECT COALESCE(SUM(amount),0) as total FROM transactions")->fetch_assoc()['total'];
 $today_collections  = $conn->query("SELECT COALESCE(SUM(amount),0) as total FROM transactions WHERE payment_date = CURDATE()")->fetch_assoc()['total'];
 $total_transactions = $conn->query("SELECT COUNT(*) as cnt FROM transactions")->fetch_assoc()['cnt'];
@@ -14,7 +14,7 @@ $total_students     = $conn->query("SELECT COUNT(*) as cnt FROM students WHERE s
 $pending_balance    = $conn->query("SELECT COALESCE(SUM(balance),0) as total FROM students WHERE status='active'")->fetch_assoc()['total'];
 $total_cashiers     = $conn->query("SELECT COUNT(*) as cnt FROM users WHERE role='cashier' AND status='active'")->fetch_assoc()['cnt'];
 
-// Monthly chart data
+
 $monthly_data = $conn->query("
     SELECT DATE_FORMAT(payment_date,'%b %Y') as month,
            DATE_FORMAT(payment_date,'%Y-%m') as sort_key,
@@ -29,7 +29,7 @@ while ($row = $monthly_data->fetch_assoc()) {
     $chart_values[] = (float)$row['total'];
 }
 
-// Payment type breakdown
+
 $type_data = $conn->query("
     SELECT pt.type_name, SUM(t.amount) as total
     FROM transactions t
@@ -42,7 +42,7 @@ while ($row = $type_data->fetch_assoc()) {
     $type_values[] = (float)$row['total'];
 }
 
-// Recent transactions
+
 $recent_tx = $conn->query("
     SELECT t.receipt_no, s.full_name as student_name, s.student_id,
            pt.type_name, t.amount, t.payment_date, u.full_name as cashier_name
@@ -52,7 +52,7 @@ $recent_tx = $conn->query("
     JOIN users u ON t.cashier_id = u.id
     ORDER BY t.created_at DESC LIMIT 8
 ");
-//  Color map
+
 $type_colors = [
     'Tuition Fee'       => ['bg'=>'#ede9fe','text'=>'#6d28d9','icon'=>'#7c3aed'],
     'Books & Materials' => ['bg'=>'#dbeafe','text'=>'#1d4ed8','icon'=>'#2563eb'],
@@ -107,7 +107,7 @@ include 'layout_header.php';
     }
 </style>
 
-<!-- WELCOME BANNER -->
+
 <div class="fade-up rounded-2xl lg:items-center lg:justify-center mb-8 w-[300px] h-[50px] flex flex-col sm:flex-row items-center sm:items-center justify-center gap-4"
      style="background: linear-gradient(135deg, #1e3a5f, #1a2980, #1a2980);">
     <div>
@@ -120,10 +120,10 @@ include 'layout_header.php';
 
 </div>
 
-<!-- STATS GRID -->
+
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
 
-    <!-- Total Collections -->
+
     <div class="stat-hover fade-up bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
         <div class="flex items-center justify-between mb-3">
             <p class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Total Collections</p>
@@ -133,7 +133,7 @@ include 'layout_header.php';
         <p class="text-slate-400 text-xs mt-1"><i class="fa-solid fa-clock-rotate-left mr-1"></i>All time total</p>
     </div>
 
-    <!-- Today -->
+
     <div class="stat-hover fade-up-2 bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
         <div class="flex items-center justify-between mb-3">
             <p class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Today's Collections</p>
@@ -143,7 +143,7 @@ include 'layout_header.php';
         <p class="text-slate-400 text-xs mt-1"><i class="fa-regular fa-calendar mr-1"></i><?= date('F j, Y') ?></p>
     </div>
 
-    <!-- Transactions -->
+
     <div class="stat-hover fade-up-3 bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
         <div class="flex items-center justify-between mb-3">
             <p class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Total Transactions</p>
@@ -153,7 +153,7 @@ include 'layout_header.php';
         <p class="text-slate-400 text-xs mt-1"><i class="fa-solid fa-check-circle mr-1 text-emerald-400"></i>Recorded payments</p>
     </div>
 
-    <!-- Students -->
+
     <div class="stat-hover fade-up-4 bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
         <div class="flex items-center justify-between mb-3">
             <p class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Active Students</p>
@@ -163,7 +163,7 @@ include 'layout_header.php';
         <p class="text-slate-400 text-xs mt-1"><i class="fa-solid fa-school mr-1 text-amber-400"></i>Currently enrolled</p>
     </div>
 
-    <!-- Pending Balance -->
+
     <div class="stat-hover fade-up-5 bg-white rounded-2xl p-5 border border-red-100 shadow-sm">
         <div class="flex items-center justify-between mb-3">
             <p class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Pending Balance</p>
@@ -173,7 +173,7 @@ include 'layout_header.php';
         <p class="text-slate-400 text-xs mt-1"><i class="fa-solid fa-hourglass-half mr-1 text-red-300"></i>Uncollected fees</p>
     </div>
 
-    <!-- Cashiers -->
+
     <div class="stat-hover fade-up-6 bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
         <div class="flex items-center justify-between mb-3">
             <p class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Active Cashiers</p>
@@ -185,7 +185,7 @@ include 'layout_header.php';
 
 </div>
 
-<!-- CHARTS -->
+
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
 
     <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 fade-up md:col-span-2">
@@ -214,7 +214,7 @@ include 'layout_header.php';
 
 </div>
 
-<!-- RECENT TRANSACTIONS -->
+
 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm fade-up">
     <div class="flex items-center justify-between px-6 py-4 border-b border-slate-50">
         <div>
@@ -295,7 +295,7 @@ include 'layout_header.php';
 </div>
 
 <script>
-// Monthly Chart
+
 new Chart(document.getElementById('monthlyChart'), {
     type: 'bar',
     data: {
@@ -327,7 +327,7 @@ new Chart(document.getElementById('monthlyChart'), {
     }
 });
 
-// Doughnut Chart
+
 new Chart(document.getElementById('typeChart'), {
     type: 'doughnut',
     data: {
