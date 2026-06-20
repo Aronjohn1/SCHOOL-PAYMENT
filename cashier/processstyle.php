@@ -66,7 +66,7 @@ textarea.field-input { padding-top: 11px; padding-left: 40px; resize: none; }
 .progress-track { width: 100%; height: 8px; background: #e2e8f0; border-radius: 99px; overflow: hidden; }
 .progress-fill  { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #10b981, #059669); transition: width 0.8s ease; }
 
-/* PAYMENT TYPE ITEM */
+
 .pt-item {
     border: 2px solid #e2e8f0;
     border-radius: 14px;
@@ -112,7 +112,7 @@ textarea.field-input { padding-top: 11px; padding-left: 40px; resize: none; }
     border-radius: 14px; margin-top: 16px;
 }
 
-/* RESPONSIVE  */
+
 @media (max-width: 640px) {
 
 
