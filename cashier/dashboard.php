@@ -12,10 +12,10 @@ $today_count   = $conn->query("SELECT COUNT(*) as c FROM transactions WHERE cash
 $month_total   = $conn->query("SELECT COALESCE(SUM(amount),0) as t FROM transactions WHERE cashier_id=$cashier_id AND DATE_FORMAT(payment_date,'%Y-%m')=DATE_FORMAT(CURDATE(),'%Y-%m')")->fetch_assoc()['t'];
 $overall_total = $conn->query("SELECT COALESCE(SUM(amount),0) as t FROM transactions WHERE cashier_id=$cashier_id")->fetch_assoc()['t'];
 
-//  Today's total (used for % in breakdown)
+
 $total = $today_total;
 
-//  Breakdown by payment type (today only)
+
 $pt_breakdown = $conn->query("
     SELECT pt.type_name, COALESCE(SUM(t.amount), 0) AS total
     FROM transactions t
@@ -26,7 +26,7 @@ $pt_breakdown = $conn->query("
     ORDER BY total DESC
 ");
 
-//  Recent transactions
+
 $recent = $conn->query("
     SELECT t.receipt_no, s.full_name AS student_name, s.student_id AS stud_id,
            pt.type_name, t.amount, t.payment_date, t.payment_time
@@ -38,7 +38,7 @@ $recent = $conn->query("
     LIMIT 10
 ");
 
-// Color map by payment type name 
+
 $type_colors = [
     'Tuition Fee'       => ['bg'=>'#ede9fe','text'=>'#6d28d9','icon'=>'#7c3aed'],
     'Books & Materials' => ['bg'=>'#dbeafe','text'=>'#1d4ed8','icon'=>'#2563eb'],
@@ -69,7 +69,7 @@ function getTypeColor($type_name, $type_colors, $fallback_colors) {
     return $fallback_colors[$idx];
 }
 
-//  Pre-fetch breakdown rows 
+
 $pt_rows = [];
 $has_pt  = false;
 while ($pb = $pt_breakdown->fetch_assoc()) {
@@ -82,7 +82,7 @@ include 'layout_header.php';
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<!-- WELCOME BANNER -->
+
 <div class="fade-up rounded-2xl mb-8 inline-flex items-center justify-center px-6 py-4"
      style="background: linear-gradient(135deg, #064e3b, #065f46);">
     <h2 style="color:#fff; font-size:22px; font-weight:800; margin:0; text-align:center; white-space:nowrap;">
@@ -90,7 +90,7 @@ include 'layout_header.php';
     </h2>
 </div>
 
-<!--STATS -->
+
 <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:18px; margin-bottom:24px;">
     <div class="stat-card">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
@@ -122,7 +122,7 @@ include 'layout_header.php';
     </div>
 </div>
 
-<!--RECENT TRANSACTIONS -->
+
 <div class="card">
     <div style="padding:18px 24px; border-bottom:1px solid #d1fae5; display:flex; justify-content:space-between; align-items:center;">
         <h3 style="font-size:15px; font-weight:700; color:#064e3b; margin:0;">
