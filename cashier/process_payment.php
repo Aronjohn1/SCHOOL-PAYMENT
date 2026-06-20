@@ -100,7 +100,7 @@ include 'layout_header.php';
     </div>
 </div>
 
-<!-- ALERT -->
+
 <?php if ($msg): ?>
 <div class="fade-up" style="display:flex; align-items:center; gap:12px; padding:14px 18px; border-radius:14px; margin-bottom:18px;
     <?= $msg_type==='error' ? 'background:#fef2f2; border:1.5px solid #fecaca; color:#b91c1c;' : 'background:#f0fdf4; border:1.5px solid #bbf7d0; color:#065f46;' ?>">
@@ -109,7 +109,7 @@ include 'layout_header.php';
 </div>
 <?php endif; ?>
 
-<!-- STEP 1 — SEARCH -->
+
 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 mb-5 fade-up">
     <div class="section-label">
         <div class="step-badge">1</div> Find Student
@@ -151,10 +151,10 @@ include 'layout_header.php';
     $is_college = in_array($student['grade_level'], $college_levels);
 ?>
 
-<!-- STEP 2 — STUDENT INFO + FEE SUMMARY -->
+
 <div class="student-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px;">
 
-    <!-- Student Info -->
+
     <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 fade-up2">
         <div class="section-label"><div class="step-badge">2</div> Student Information</div>
         <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px;">
@@ -193,7 +193,7 @@ include 'layout_header.php';
         </div>
     </div>
 
-    <!-- Fee Summary -->
+
     <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 fade-up2">
         <div class="section-label"><i class="fa-solid fa-peso-sign" style="color:#10b981;"></i> Fee Summary</div>
         <div class="fee-row">
@@ -237,7 +237,7 @@ include 'layout_header.php';
     </div>
 </div>
 
-<!-- STEP 3 — PAYMENT FORM -->
+
 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 fade-up3">
     <div class="section-label"><div class="step-badge">3</div> Select Payment Types & Amounts</div>
     <p style="font-size:13px;color:#94a3b8;margin:-8px 0 18px;">
@@ -249,7 +249,7 @@ include 'layout_header.php';
         <input type="hidden" name="process_payment" value="1">
         <input type="hidden" name="student_id_db" value="<?= $student['id'] ?>">
 
-        <!-- Payment Type Cards Grid -->
+  
         <div class="pt-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:12px; margin-bottom:20px;">
             <?php foreach ($payment_types as $i => $pt): ?>
             <div class="pt-item" id="pt_item_<?= $pt['id'] ?>" onclick="togglePT(<?= $pt['id'] ?>)">
@@ -296,7 +296,7 @@ include 'layout_header.php';
         </div>
         <?php endif; ?>
 
-        <!-- Live Total Strip -->
+
         <div class="total-strip" id="totalStrip" style="display:none;">
             <div>
                 <p style="font-size:11px;font-weight:800;color:#065f46;text-transform:uppercase;letter-spacing:0.8px;margin:0 0 2px;">
@@ -320,7 +320,7 @@ include 'layout_header.php';
             </div>
         </div>
 
-        <!-- Summary strip -->
+
         <div class="summary-strip" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:16px;padding:14px 18px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:14px;">
             <div style="display:flex;align-items:center;gap:10px;">
                 <div style="width:36px;height:36px;background:linear-gradient(135deg,<?= $is_college ? '#f59e0b,#d97706' : '#10b981,#059669' ?>);border-radius:10px;display:flex;align-items:center;justify-content:center;">
@@ -337,7 +337,7 @@ include 'layout_header.php';
             </div>
         </div>
 
-        <!-- Action Buttons -->
+  
         <div class="action-row" style="display:flex;align-items:center;justify-content:space-between;margin-top:22px;padding-top:20px;border-top:1.5px solid #f1f5f9;">
             <a href="process_payment.php" class="btn-cancel">
                 <i class="fa-solid fa-xmark"></i> Cancel
@@ -420,7 +420,7 @@ function updateTotal() {
 
 <?php else: ?>
 
-<!-- EMPTY STATE -->
+
 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm fade-up2" style="padding:64px 40px;text-align:center;">
     <div style="width:80px;height:80px;background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-radius:24px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;border:2px solid #a7f3d0;">
         <i class="fa-solid fa-user-graduate" style="font-size:34px;color:#10b981;"></i>
