@@ -68,7 +68,7 @@ $available_months = $conn->query("
                     DATE_FORMAT(payment_date,'%M %Y')  as label
     FROM transactions ORDER BY ym DESC LIMIT 12
 ");
-//  Color map
+
 $type_colors = [
     'Tuition Fee'       => ['bg'=>'#ede9fe','text'=>'#6d28d9','icon'=>'#7c3aed'],
     'Books & Materials' => ['bg'=>'#dbeafe','text'=>'#1d4ed8','icon'=>'#2563eb'],
@@ -101,7 +101,7 @@ include 'layout_header.php';
 
 
 <?php include 'reportstyle.php';?>
-<!-- ═ FILTER BAR ═ -->
+
 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 mb-5 fade-up no-print">
     <div class="flex items-center gap-2 mb-4">
         <i class="fa-solid fa-chart-bar text-indigo-400"></i>
@@ -125,7 +125,7 @@ include 'layout_header.php';
                 </div>
             </div>
 
-            <!-- Date / Month picker -->
+  
             <?php if ($report_type === 'daily'): ?>
             <div>
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Date</label>
@@ -150,7 +150,7 @@ include 'layout_header.php';
             </div>
             <?php endif; ?>
 
-            <!-- Buttons -->
+    
             <div class="flex gap-2 btn-row">
                 <button type="submit"
                     class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition">
@@ -165,7 +165,7 @@ include 'layout_header.php';
     </form>
 </div>
 
-<!-- REPORT BANNER -->
+
 <div class="rounded-2xl p-6 mb-5 fade-up2 print-card w-[300px]  "
      style="background: linear-gradient(135deg, #1e3a5f, #1a2980, #1a2980);">
     <div class="flex items-center justify-between flex-wrap gap-4 banner-inner">
@@ -181,7 +181,7 @@ include 'layout_header.php';
     </div>
 </div>
 
-<!-- NO DATA HINT -->
+
 <?php
 $months_list = [];
 while ($am = $available_months->fetch_assoc()) $months_list[] = $am;
@@ -206,7 +206,7 @@ if ($count == 0 && !empty($months_list)):
 </div>
 <?php endif; ?>
 
-<!-- SUMMARY CARDS -->
+
 <div class="grid grid-cols-3 gap-4 mb-5 fade-up2 summary-grid">
     <div class="bg-white rounded-2xl border border-emerald-100 shadow-sm p-5 flex  flex-col justify-center items-center text-center print-card">
      
@@ -225,7 +225,7 @@ if ($count == 0 && !empty($months_list)):
     </div>
 </div>
 
-<!-- BREAKDOWN BY PAYMENT TYPE -->
+
 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm mb-5 fade-up3 print-card">
     <div class="flex items-center gap-2 px-6 py-4 border-b border-slate-50">
    
@@ -286,7 +286,7 @@ if ($count == 0 && !empty($months_list)):
     </div>
 </div>
 
-<!-- TRANSACTION DETAILS -->
+
 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm fade-up3 print-card">
     <div class="flex items-center justify-between px-6 py-4 border-b border-slate-50">
         <div>
