@@ -1,11 +1,9 @@
--- ============================================
--- SCHOOL PAYMENT SYSTEM - DATABASE SCHEMA
--- ============================================
+
 
 CREATE DATABASE IF NOT EXISTS school_payment_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE school_payment_db;
 
--- USERS TABLE (Admin & Cashier)
+
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -18,7 +16,7 @@ CREATE TABLE IF NOT EXISTS users (
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- STUDENTS TABLE
+
 CREATE TABLE IF NOT EXISTS students (
     id INT AUTO_INCREMENT PRIMARY KEY,
     student_id VARCHAR(20) NOT NULL UNIQUE,
@@ -35,7 +33,7 @@ CREATE TABLE IF NOT EXISTS students (
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- PAYMENT TYPES TABLE
+
 CREATE TABLE IF NOT EXISTS payment_types (
     id INT AUTO_INCREMENT PRIMARY KEY,
     type_name VARCHAR(100) NOT NULL,
@@ -44,7 +42,7 @@ CREATE TABLE IF NOT EXISTS payment_types (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- TRANSACTIONS TABLE
+
 CREATE TABLE IF NOT EXISTS transactions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     receipt_no VARCHAR(20) NOT NULL UNIQUE,
@@ -61,18 +59,16 @@ CREATE TABLE IF NOT EXISTS transactions (
     FOREIGN KEY (payment_type_id) REFERENCES payment_types(id)
 );
 
--- ============================================
--- DEFAULT DATA
--- ============================================
 
--- Default Admin Account (password: admin123)
+
+
 INSERT INTO users (username, password, full_name, email, role) VALUES
 ('admin', 'admin123', 'System Administrator', 'admin@school.edu', 'admin');
 
--- Default Cashier (password: cashier123)  
+
 INSERT INTO users (username, password, full_name, email, role) VALUES
 ('cashier1', 'cashier123', 'Maria Santos', 'cashier@school.edu', 'cashier');
--- Payment Types
+
 INSERT INTO payment_types (type_name, description) VALUES
 ('Tuition Fee', 'Monthly or semestral tuition payment'),
 ('Miscellaneous Fee', 'Laboratory, library, and other miscellaneous fees'),
@@ -82,7 +78,7 @@ INSERT INTO payment_types (type_name, description) VALUES
 ('Technology Fee', 'Computer lab and technology usage fee'),
 ('Graduation Fee', 'Graduation ceremony and diploma fee');
 
--- Sample Students
+
 INSERT INTO students (student_id, full_name, grade_level, section, school_year, total_fee, total_paid) VALUES
 ('2024-001', 'Juan Dela Cruz', 'Grade 10', 'Rizal', '2024-2025', 25000.00, 10000.00),
 ('2024-002', 'Maria Garcia', 'Grade 11', 'STEM-A', '2024-2025', 30000.00, 15000.00),
