@@ -1,6 +1,5 @@
 <?php
-// Admin layout header - include at top of each admin page
-// Usage: include 'layout_header.php'; (set $page_title and $active_page before including)
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +21,7 @@
         }
         body { background: #f1f5f9; margin: 0; }
 
-        /* ── SIDEBAR ── */
+
         .sidebar {
             width: var(--sidebar-width);
             background: var(--sidebar-bg);
@@ -50,7 +49,7 @@
             box-shadow: 0 4px 16px rgba(59,130,246,0.4);
         }
 
-        /* ── NAV ── */
+
         .nav-section { padding: 16px 12px 8px; }
         .nav-label {
             color: rgba(255,255,255,0.25);
@@ -80,7 +79,7 @@
             border-top: 1px solid rgba(255,255,255,0.07);
         }
 
-        /* ── OVERLAY ── */
+ 
         .sidebar-overlay {
             display: none;
             position: fixed; inset: 0;
@@ -91,7 +90,7 @@
         }
         .sidebar-overlay.show { display: block; }
 
-        /* ── MAIN ── */
+    
         .main-content {
             margin-left: var(--sidebar-width);
             min-height: 100vh;
@@ -109,7 +108,7 @@
         }
         .page-area { padding: 28px; }
 
-        /* ── HAMBURGER ── */
+       
         .btn-hamburger {
             display: none;
             align-items: center; justify-content: center;
@@ -125,7 +124,7 @@
         }
         .btn-hamburger:hover { background: #e2e8f0; color: #0f172a; }
 
-        /* ── CLOSE BUTTON inside sidebar (mobile) ── */
+      
         .btn-sidebar-close {
             display: none;
             position: absolute;
@@ -142,7 +141,7 @@
         }
         .btn-sidebar-close:hover { background: rgba(255,255,255,0.15); color: #fff; }
 
-        /* ── CARDS ── */
+     
         .stat-card {
             background: #fff; border-radius: 16px;
             padding: 24px; border: 1px solid #e2e8f0;
@@ -151,21 +150,21 @@
         .stat-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); transform: translateY(-1px); }
         .card { background: #fff; border-radius: 16px; border: 1px solid #e2e8f0; }
 
-        /* ── TABLE ── */
+
         .table-header { background: #f8fafc; }
         table  { width: 100%; border-collapse: collapse; }
         th { padding: 13px 16px; text-align: left; font-size: 12px; font-weight: 700; color: #94a3b8; letter-spacing: 0.5px; text-transform: uppercase; }
         td { padding: 14px 16px; font-size: 14px; color: #334155; border-top: 1px solid #f1f5f9; }
         tr:hover td { background: #f8fafc; }
 
-        /* ── BADGES ── */
+     
         .badge { padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
         .badge-success { background: #dcfce7; color: #16a34a; }
         .badge-danger  { background: #fee2e2; color: #dc2626; }
         .badge-warning { background: #fef9c3; color: #ca8a04; }
         .badge-info    { background: #dbeafe; color: #2563eb; }
 
-        /* ── BUTTONS ── */
+
         .btn-primary {
             background: #3b82f6; color: #fff;
             padding: 9px 18px; border-radius: 10px;
@@ -199,7 +198,7 @@
         }
         .btn-edit:hover { background: #bfdbfe; }
 
-        /* ── MODAL ── */
+  
         .modal-overlay {
             display: none; position: fixed; inset: 0;
             background: rgba(0,0,0,0.5); z-index: 999;
@@ -213,7 +212,7 @@
             box-shadow: 0 25px 60px rgba(0,0,0,0.3);
         }
 
-        /* ── FORMS ── */
+ 
         .form-group { margin-bottom: 18px; }
         .form-group label { display: block; color: #475569; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
         .form-control {
@@ -231,16 +230,14 @@
         }
         .search-box:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
 
-        /* ── ALERTS ── */
+     
         .alert { padding: 12px 16px; border-radius: 10px; font-size: 14px; margin-bottom: 16px; }
         .alert-success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
         .alert-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
 
-        /* 
-           RESPONSIVE
-        */
+     
         @media (max-width: 768px) {
-            /* Sidebar slides off-screen by default */
+  
             .sidebar {
                 transform: translateX(-100%);
             }
@@ -248,19 +245,19 @@
                 transform: translateX(0);
                 box-shadow: 8px 0 32px rgba(0,0,0,0.35);
             }
-            /* Show close X inside sidebar */
+   
             .btn-sidebar-close {
                 display: flex;
             }
-            /* Main takes full width */
+
             .main-content {
                 margin-left: 0 !important;
             }
-            /* Show hamburger */
+  
             .btn-hamburger {
                 display: flex;
             }
-            /* Tighter page padding */
+  
             .page-area {
                 padding: 16px;
             }
@@ -272,27 +269,25 @@
 </head>
 <body>
 
-<!-- Dark overlay when sidebar opens on mobile -->
+
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-<!-- ═══════════════════════════════════════
-     SIDEBAR
-═══════════════════════════════════════ -->
+
 <aside class="sidebar" id="sidebar">
 
-    <!-- Close button (visible on mobile only) -->
+ 
     <button class="btn-sidebar-close" onclick="closeSidebar()" aria-label="Close menu">
         <i class="fa-solid fa-xmark"></i>
     </button>
 
-    <!-- Logo -->
+
     <div class="sidebar-logo">
        
         <h1>School Payment</h1>
         <p>Admin Panel</p>
     </div>
 
-    <!-- Navigation -->
+
     <nav class="flex-1 overflow-y-auto py-2">
 
         <div class="nav-section">
@@ -348,7 +343,7 @@
 
     </nav>
 
-    <!-- User Footer -->
+
     <div class="sidebar-footer">
         <div style="background:rgba(255,255,255,0.05); border-radius:12px; padding:12px; display:flex; align-items:center; gap:10px; margin-bottom:10px;">
             <div style="width:36px; height:36px; background:linear-gradient(135deg,#3b82f6,#06b6d4); border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
@@ -378,16 +373,14 @@
 
 </aside>
 
-<!-- ═══════════════════════════════════════
-     MAIN CONTENT
-═══════════════════════════════════════ -->
+
 <main class="main-content">
 
-    <!-- Top Bar -->
+
     <div class="topbar">
         <div style="display:flex; align-items:center; gap:12px;">
 
-            <!--  Hamburger — only visible on mobile -->
+        
             <button class="btn-hamburger" onclick="openSidebar()" aria-label="Open menu">
                 <i class="fa-solid fa-bars"></i>
             </button>
@@ -400,7 +393,7 @@
       
     </div>
 
-    <!-- Page Content -->
+
     <div class="page-area">
 
 <script>
@@ -414,7 +407,7 @@ function closeSidebar() {
     document.getElementById('sidebarOverlay').classList.remove('show');
     document.body.style.overflow = '';
 }
-// Close on ESC
+
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeSidebar();
 });
