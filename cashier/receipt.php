@@ -39,7 +39,7 @@ if (!$tx) { header('Location: process_payment.php'); exit(); }
 </div>
 
 <div class="receipt">
-    <!-- HEADER -->
+
     <div class="receipt-header">
         <div class="logo">
             <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5">
@@ -52,9 +52,9 @@ if (!$tx) { header('Location: process_payment.php'); exit(); }
         <span class="receipt-badge">OFFICIAL RECEIPT</span>
     </div>
 
-    <!-- BODY -->
+
     <div class="receipt-body">
-        <!-- Receipt No & Date -->
+
         <div class="receipt-no">
             <p>Receipt Number</p>
             <h2><?= htmlspecialchars($tx['receipt_no']) ?></h2>
@@ -64,7 +64,7 @@ if (!$tx) { header('Location: process_payment.php'); exit(); }
             </p>
         </div>
 
-        <!-- Student Info -->
+
         <p class="section-title">Student Information</p>
         <div class="info-grid">
             <div class="info-item" style="grid-column:1/-1;">
@@ -95,13 +95,13 @@ if (!$tx) { header('Location: process_payment.php'); exit(); }
         </div>
         <?php endif; ?>
 
-        <!-- Amount -->
+
         <div class="amount-box">
             <p>Amount Paid</p>
             <h2>₱<?= number_format($tx['amount'], 2) ?></h2>
         </div>
 
-        <!-- Balance -->
+   
         <div class="balance-row <?= $tx['balance'] > 0 ? 'has-balance' : 'no-balance' ?>">
             <div>
                 <p style="font-size:12px; color:#6b7280; margin:0;">Remaining Balance</p>
@@ -114,7 +114,7 @@ if (!$tx) { header('Location: process_payment.php'); exit(); }
             </p>
         </div>
 
-        <!-- Cashier Info -->
+  
         <p class="section-title">Transaction Details</p>
         <div class="info-grid">
             <div class="info-item">
@@ -127,7 +127,7 @@ if (!$tx) { header('Location: process_payment.php'); exit(); }
             </div>
         </div>
 
-        <!-- Signature Lines -->
+
         <div class="sig-line">
             <div class="sig-box">
                 <div class="line"></div>
@@ -139,7 +139,7 @@ if (!$tx) { header('Location: process_payment.php'); exit(); }
             </div>
         </div>
 
-        <!-- Footer -->
+
         <div class="footer-note">
             <p>This is an official receipt. Please keep for your records.</p>
             <p>Generated: <?= date('F j, Y h:i A') ?></p>
