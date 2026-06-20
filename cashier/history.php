@@ -44,9 +44,9 @@ $total_count = (int)$conn->query("
     $where
 ")->fetch_assoc()['cnt'];
 
-// Cashier name for print header
+
 $cashier_name = $conn->query("SELECT full_name FROM users WHERE id=$cashier_id")->fetch_assoc()['full_name'] ?? 'Cashier';
-// Color map
+
 $type_colors = [
     'Tuition Fee'       => ['bg'=>'#ede9fe','text'=>'#6d28d9','icon'=>'#7c3aed'],
     'Books & Materials' => ['bg'=>'#dbeafe','text'=>'#1d4ed8','icon'=>'#2563eb'],
@@ -113,9 +113,9 @@ include 'layout_header.php';
 tbody tr { transition: background 0.15s; }
 tbody tr:hover { background: #f8fffe; }
 
-/* PRINT STYLES  */
+
 @media print {
-    /* Hide everything except print area */
+ 
     body * { visibility: hidden; }
     #print-area, #print-area * { visibility: visible; }
     #print-area {
@@ -128,7 +128,7 @@ tbody tr:hover { background: #f8fffe; }
 }
 </style>
 
-<!--  PRINT AREA (only this shows on print)  -->
+
 <div id="print-area" style="display:none;">
     <div style="border-bottom:2px solid #064e3b; padding-bottom:14px; margin-bottom:20px;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
@@ -168,7 +168,7 @@ tbody tr:hover { background: #f8fffe; }
             </tr>
         </thead>
         <tbody id="print-tbody">
-            <!-- filled by JS before print -->
+
         </tbody>
         <tfoot>
             <tr style="background:#f0fdf4; border-top:2px solid #064e3b;">
@@ -180,7 +180,7 @@ tbody tr:hover { background: #f8fffe; }
     </table>
 </div>
 
-<!--  PAGE HEADER  -->
+
 <div class="fade-up no-print" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:22px;">
     <div>
         <div style="display:flex; align-items:center; gap:12px; margin-bottom:4px;">
@@ -197,12 +197,12 @@ tbody tr:hover { background: #f8fffe; }
     </div>
 </div>
 
-<!--  FILTER BAR -->
+
 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 mb-5 fade-up no-print">
     <form method="GET">
         <div style="display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap;">
 
-            <!-- Search -->
+
             <div style="flex:1; min-width:220px;">
                 <label style="display:block; font-size:11px; font-weight:800; color:#64748b; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:7px;">
                     <i class="fa-solid fa-magnifying-glass" style="margin-right:4px; color:#10b981;"></i>Search
@@ -215,7 +215,7 @@ tbody tr:hover { background: #f8fffe; }
                 </div>
             </div>
 
-            <!-- Date From -->
+
             <div>
                 <label style="display:block; font-size:11px; font-weight:800; color:#64748b; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:7px;">
                     <i class="fa-regular fa-calendar" style="margin-right:4px; color:#10b981;"></i>From
@@ -227,7 +227,7 @@ tbody tr:hover { background: #f8fffe; }
                 </div>
             </div>
 
-            <!-- Date To -->
+  
             <div>
                 <label style="display:block; font-size:11px; font-weight:800; color:#64748b; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:7px;">
                     <i class="fa-regular fa-calendar" style="margin-right:4px; color:#10b981;"></i>To
@@ -254,7 +254,7 @@ tbody tr:hover { background: #f8fffe; }
 </div>
 
 
-<!--  TABLE  -->
+
 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm fade-up3 no-print">
     <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 24px; border-bottom:1px solid #f0fdf4;">
         <div>
@@ -370,7 +370,7 @@ tbody tr:hover { background: #f8fffe; }
 
 <script>
 function doPrint() {
-    // Build print table rows from data attributes
+
     const rows = document.querySelectorAll('#main-tbody tr[data-receipt]');
     let html = '';
     rows.forEach((r, i) => {
@@ -388,7 +388,7 @@ function doPrint() {
     });
     document.getElementById('print-tbody').innerHTML = html || '<tr><td colspan="8" style="text-align:center;padding:20px;color:#9ca3af;">No records.</td></tr>';
 
-    // Show print area, print, hide again
+ 
     const pa = document.getElementById('print-area');
     pa.style.display = 'block';
     window.print();
