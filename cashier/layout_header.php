@@ -1,6 +1,5 @@
 <?php
-// Cashier layout header
-// Set $page_title and $active_page before including
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +18,7 @@
         }
         body { background: #f0fdf4; margin: 0; }
 
-        /* ── SIDEBAR ── */
+
         .sidebar {
             width: var(--sidebar-width);
             background: var(--sidebar-bg);
@@ -60,7 +59,7 @@
         .nav-icon { width: 18px; height: 18px; flex-shrink: 0; }
         .sidebar-footer { margin-top: auto; padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.07); }
 
-        /* ── OVERLAY ── */
+
         .sidebar-overlay {
             display: none;
             position: fixed; inset: 0;
@@ -71,7 +70,7 @@
         }
         .sidebar-overlay.show { display: block; }
 
-        /* ── CLOSE BUTTON (mobile only) ── */
+    
         .btn-sidebar-close {
             display: none;
             position: absolute;
@@ -104,7 +103,7 @@
         }
         .btn-hamburger:hover { background: #d1fae5; }
 
-        /* ── MAIN ── */
+ 
         .main-content {
             margin-left: var(--sidebar-width);
             min-height: 100vh;
@@ -120,19 +119,19 @@
         }
         .page-area { padding: 28px; }
 
-        /* ── COMPONENTS ── */
+  
         .card { background: #fff; border-radius: 16px; border: 1px solid #d1fae5; }
         .stat-card { background: #fff; border-radius: 16px; padding: 22px; border: 1px solid #d1fae5; transition: all 0.2s; }
         .stat-card:hover { box-shadow: 0 4px 20px rgba(16,185,129,0.1); transform: translateY(-1px); }
 
-        /* ── TABLE ── */
+
         .table-header { background: #f0fdf4; }
         table { width: 100%; border-collapse: collapse; }
         th { padding: 13px 16px; text-align: left; font-size: 12px; font-weight: 700; color: #6b7280; letter-spacing: 0.5px; text-transform: uppercase; }
         td { padding: 13px 16px; font-size: 14px; color: #374151; border-top: 1px solid #f0fdf4; }
         tr:hover td { background: #f0fdf4; }
 
-        /* ── BADGES ── */
+  
         .badge { padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
         .badge-success { background: #dcfce7; color: #16a34a; }
         .badge-danger  { background: #fee2e2; color: #dc2626; }
@@ -140,7 +139,7 @@
         .badge-info    { background: #dbeafe; color: #2563eb; }
         .badge-green   { background: #d1fae5; color: #059669; }
 
-        /* ── BUTTONS ── */
+
         .btn-primary {
             background: #10b981; color: #fff;
             padding: 10px 20px; border-radius: 10px;
@@ -166,7 +165,7 @@
         }
         .btn-blue:hover { background: #2563eb; }
 
-        /* ── FORMS ── */
+
         .form-group { margin-bottom: 18px; }
         .form-group label { display: block; color: #374151; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
         .form-control {
@@ -177,7 +176,7 @@
         }
         .form-control:focus { border-color: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,0.1); }
 
-        /* ── MODAL ── */
+ 
         .modal-overlay {
             display: none; position: fixed; inset: 0;
             background: rgba(0,0,0,0.5); z-index: 999;
@@ -191,12 +190,12 @@
             box-shadow: 0 25px 60px rgba(0,0,0,0.25);
         }
 
-        /* ── ALERTS ── */
+  
         .alert { padding: 12px 16px; border-radius: 10px; font-size: 14px; margin-bottom: 16px; }
         .alert-success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
         .alert-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
 
-        /* ── SEARCH BOX ── */
+        
         .search-wrap { position: relative; }
         .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #9ca3af; }
         .search-input {
@@ -207,9 +206,7 @@
         }
         .search-input:focus { border-color: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,0.1); }
 
-        /* ════════════════════════════
-           RESPONSIVE
-        ════════════════════════════ */
+   
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -238,16 +235,14 @@
 </head>
 <body>
 
-<!-- Dark overlay -->
+
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-<!-- 
-     SIDEBAR
- -->
+
 <aside class="sidebar" id="sidebar">
 
     <div class="sidebar-logo">
-        <!-- Close button (mobile only) -->
+
         <button class="btn-sidebar-close" onclick="closeSidebar()" aria-label="Close menu">
             <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
@@ -299,14 +294,12 @@
     </div>
 </aside>
 
-<!-- 
-     MAIN CONTENT
- -->
+
 <main class="main-content">
     <div class="topbar">
         <div style="display:flex; align-items:center; gap:12px;">
 
-            <!--  Hamburger — mobile only -->
+
             <button class="btn-hamburger" onclick="openSidebar()" aria-label="Open menu">
                 <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
