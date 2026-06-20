@@ -1,5 +1,5 @@
 <?php
-// Manage payment types — Add, Edit, Delete
+
 require_once '../includes/auth.php';
 require_once '../includes/db.php';
 requireAdmin();
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $types = $conn->query("SELECT pt.*, COUNT(t.id) as usage_count FROM payment_types pt LEFT JOIN transactions t ON t.payment_type_id = pt.id GROUP BY pt.id ORDER BY pt.created_at DESC");
 
-// ─── Color map ────────────────────────────────────────────────────────────────
+
 $type_colors = [
     'Tuition Fee'       => ['bg'=>'#ede9fe','text'=>'#6d28d9','icon'=>'#7c3aed'],
     'Books & Materials' => ['bg'=>'#dbeafe','text'=>'#1d4ed8','icon'=>'#2563eb'],
@@ -96,7 +96,7 @@ include 'layout_header.php';
                     $c = getTypeColor($t['type_name'], $type_colors, $fallback_colors);
                 ?>
                 <tr>
-                    <!-- Type Name with color badge -->
+        
                     <td>
                         <span style="background:<?= $c['bg'] ?>; color:<?= $c['text'] ?>; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600; display:inline-flex; align-items:center; gap:5px; white-space:nowrap;">
                             <i class="fa-solid fa-tag" style="color:<?= $c['icon'] ?>; font-size:10px;"></i>
@@ -121,7 +121,7 @@ include 'layout_header.php';
     </div>
 </div>
 
-<!-- Add Modal -->
+
 <div class="modal-overlay" id="addModal">
     <div class="modal">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
@@ -153,7 +153,7 @@ include 'layout_header.php';
     </div>
 </div>
 
-<!-- Edit Modal -->
+
 <div class="modal-overlay" id="editModal">
     <div class="modal">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
