@@ -4,10 +4,10 @@
 function openModal(id)  { document.getElementById(id).classList.add('active'); }
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-// When grade changes, toggle g12 vs g7-11 section fields
+
 function onGradeChange(prefix) {
     const grade   = document.getElementById(prefix + '_grade_select').value;
-    const isSHS   = (grade === 'Grade 11' || grade === 'Grade 12'); // Senior High School
+    const isSHS   = (grade === 'Grade 11' || grade === 'Grade 12'); 
     const g711    = document.getElementById(prefix + '_g7_11_fields');
     const g12     = document.getElementById(prefix + '_g12_fields');
     const secHS   = document.getElementById(prefix + '_section_hs');
@@ -24,7 +24,7 @@ function onGradeChange(prefix) {
 function setLevel(prefix, level) {
     const isCollege = level === 'college';
 
-    // Level button styles
+
     const hsBtn  = document.getElementById(prefix + '_btn_highschool');
     const colBtn = document.getElementById(prefix + '_btn_college');
     [hsBtn, colBtn].forEach(b => {
@@ -35,21 +35,21 @@ function setLevel(prefix, level) {
     active.classList.remove('border-slate-200','bg-slate-50');
     active.classList.add('active-level','border-indigo-300','bg-indigo-50');
 
-    // Show/hide HS vs College field groups
+
     document.getElementById(prefix + '_hs_fields').style.display  = isCollege ? 'none'  : 'grid';
     document.getElementById(prefix + '_col_fields').style.display = isCollege ? 'grid'  : 'none';
 
-    // Enable/disable selects/inputs accordingly
+
     document.getElementById(prefix + '_grade_select').disabled = isCollege;
     document.getElementById(prefix + '_year_select').disabled  = !isCollege;
     document.getElementById(prefix + '_course').disabled       = !isCollege;
     document.getElementById(prefix + '_major').disabled        = !isCollege;
 
     if (!isCollege) {
-        // Re-trigger grade change to show correct HS sub-fields
+     
         onGradeChange(prefix);
     } else {
-        // Hide both HS sub-sections
+   
         document.getElementById(prefix + '_g7_11_fields').style.display = 'none';
         document.getElementById(prefix + '_g12_fields').style.display   = 'none';
         document.getElementById(prefix + '_section_hs').disabled = true;
@@ -80,11 +80,11 @@ function editStudent(s) {
         document.getElementById('edit_major').value       = s.major   || '';
     } else {
         document.getElementById('edit_grade_select').value = s.grade_level;
-        // Trigger grade change to show right sub-fields
+
         onGradeChange(prefix);
 
         if (s.grade_level === 'Grade 11' || s.grade_level === 'Grade 12') {
-            // Parse stored "STRAND – Section"
+      
             const parts = (s.section || '').split(' – ');
             document.getElementById('edit_strand').value      = parts[0] || '';
             document.getElementById('edit_g12_section').value = parts[1] || '';
@@ -101,7 +101,7 @@ function switchTab(tab) {
     document.getElementById('panel_hs').style.display  = isHS ? 'block' : 'none';
     document.getElementById('panel_col').style.display = isHS ? 'none'  : 'block';
 
-    // Keep search form in sync so tab is preserved on search
+
     const tabInput = document.getElementById('searchTabInput');
     if (tabInput) tabInput.value = tab;
 
@@ -119,19 +119,19 @@ function switchTab(tab) {
     tabCol.querySelector('span').className = !isHS ? 'bg-amber-100 text-amber-700 text-xs font-bold px-2 py-0.5 rounded-full'  : 'bg-slate-100 text-slate-500 text-xs font-bold px-2 py-0.5 rounded-full';
 }
 
-// Close on backdrop
+
 document.querySelectorAll('.modal-overlay').forEach(el => {
     el.addEventListener('click', e => { if (e.target === el) el.classList.remove('active'); });
 });
 
-// Restore active tab from URL on page load (preserves tab after search)
+
 const urlParams = new URLSearchParams(window.location.search);
 const activeTab = urlParams.get('tab') || 'hs';
 switchTab(activeTab);
 setLevel('add', 'highschool');
 setLevel('edit', 'highschool');
 
-//  BULK DELETE
+
 function getChecked() {
     return [...document.querySelectorAll('.chk-hs:checked, .chk-col:checked')];
 }
