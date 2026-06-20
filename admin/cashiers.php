@@ -122,7 +122,7 @@ include 'layout_header.php';
     </div>
 </div>
 
-<!-- Add Modal -->
+
 <div class="modal-overlay" id="addModal">
     <div class="modal">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
@@ -168,7 +168,7 @@ include 'layout_header.php';
     </div>
 </div>
 
-<!-- Edit Modal -->
+
 <div class="modal-overlay" id="editModal">
     <div class="modal">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
