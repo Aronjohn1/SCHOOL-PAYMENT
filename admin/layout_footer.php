@@ -1,4 +1,4 @@
-</div><!-- /.page-area -->
-</main><!-- /.main-content -->
+</div>
+</main>
 </body>
 </html>
