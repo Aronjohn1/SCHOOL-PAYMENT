@@ -7,7 +7,7 @@ $page_title = 'Students';
 $active_page = 'students';
 $msg = ''; $msg_type = '';
 
-// Handle actions
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
 
@@ -21,8 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $student_level  = $_POST['student_level'] ?? 'highschool';
         $grade_level    = trim($_POST['grade_level'] ?? '');
         $section        = trim($_POST['section'] ?? '');
-        // For Grade 12: strand stored in section column, sub-section separate
-        // We store as "STRAND – Section" if grade 12
+   
         if (in_array($grade_level, ['Grade 11', 'Grade 12'])) {
             $strand    = trim($_POST['strand'] ?? '');
             $g12sec    = trim($_POST['g12_section'] ?? '');
@@ -30,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if ($action === 'add') {
-            // Check for duplicate student_id
+         
             $check = $conn->prepare("SELECT id FROM students WHERE student_id = ?");
             $check->bind_param("s", $student_id_val);
             $check->execute();
@@ -45,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } else {
             $id = intval($_POST['id']);
-            // Check for duplicate student_id — exclude current student
+       
             $check = $conn->prepare("SELECT id FROM students WHERE student_id = ? AND id != ?");
             $check->bind_param("si", $student_id_val, $id);
             $check->execute();
@@ -115,7 +114,7 @@ $students      = $conn->query("SELECT * FROM students $where ORDER BY created_at
 $total_count   = $conn->query("SELECT COUNT(*) as cnt FROM students WHERE status='active'")->fetch_assoc()['cnt'];
 $total_balance = $conn->query("SELECT COALESCE(SUM(balance),0) as t FROM students WHERE status='active'")->fetch_assoc()['t'];
 
-// Separate students
+
 $college_levels = ['1st Year','2nd Year','3rd Year','4th Year','5th Year'];
 $hs_students = []; $col_students = [];
 while ($s = $students->fetch_assoc()) {
@@ -129,7 +128,7 @@ include 'layout_header.php';
 ?>
 <?php include 'studentstyle.php';?>
 
-<!-- ALERT -->
+
 <?php if ($msg): ?>
 <div class="flex items-center gap-3 mb-5 px-4 py-3 rounded-xl text-sm font-medium fade-up
     <?= $msg_type === 'success' ? 'bg-emerald-50 border border-emerald-200 text-emerald-700' : 'bg-red-50 border border-red-200 text-red-700' ?>">
@@ -138,7 +137,7 @@ include 'layout_header.php';
 </div>
 <?php endif; ?>
 
-<!-- SUMMARY CARDS -->
+
 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5 fade-up summary-cards-grid">
     <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-4 flex items-center gap-4">
         <div class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
@@ -170,10 +169,10 @@ include 'layout_header.php';
 
 </div>
 
-<!-- MAIN CARD -->
+
 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm fade-up2">
 
-    <!-- Header -->
+
     <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 flex-wrap gap-3 card-header-row">
         <div>
             <h3 class="text-slate-800 font-bold text-base">
@@ -200,7 +199,7 @@ include 'layout_header.php';
         </div>
     </div>
 
-    <!-- BULK TOOLBAR -->
+
     <div id="bulkToolbar" class="hidden items-center gap-3 px-6 py-3 bg-red-50 border-b border-red-100 flex-wrap">
         <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
         <span class="text-red-700 text-sm font-semibold" id="bulkCount">0 selected</span>
@@ -221,7 +220,7 @@ include 'layout_header.php';
         </p>
     </div>
 
-    <!-- TABS -->
+
     <div class="flex gap-1 px-6 pt-4 border-b border-slate-100">
         <button onclick="switchTab('hs')" id="tab_hs"
             class="tab-btn flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-t-xl border-b-2 border-indigo-500 text-indigo-600 bg-indigo-50 transition-all">
@@ -235,7 +234,7 @@ include 'layout_header.php';
         </button>
     </div>
 
-    <!-- HIGH SCHOOL TABLE -->
+  
     <div id="panel_hs" class="overflow-x-auto">
         <table class="w-full">
             <thead>
@@ -282,7 +281,7 @@ include 'layout_header.php';
                     <td class="px-6 py-4 text-slate-600 text-sm">
                         <?php if (in_array($s['grade_level'], ['Grade 11','Grade 12'])): ?>
                             <?php
-                            // section stored as "STRAND – SubSection" or just "STRAND"
+             
                             $parts = explode(' – ', $s['section'], 2);
                             $strand_disp = $parts[0] ?? $s['section'];
                             $sec_disp    = $parts[1] ?? '';
@@ -341,7 +340,7 @@ include 'layout_header.php';
         </table>
     </div>
 
-    <!-- COLLEGE TABLE-->
+
     <div id="panel_col" class="overflow-x-auto" style="display:none;">
         <table class="w-full">
             <thead>
@@ -430,10 +429,7 @@ include 'layout_header.php';
 </div>
 
 
-<!-- ══════════════════════════════════════════
-     REUSABLE MODAL FIELDS MACRO (PHP helper)
-     Call buildHSFields($prefix) / buildColFields($prefix)
-══════════════════════════════════════════ -->
+
 <?php
 $strands_list = ['ABM','STEM','HUMSS','GAS','TVL – ICT','TVL – HE','TVL – IA','TVL – AFA','SPORTS','ARTS & DESIGN'];
 
@@ -442,7 +438,7 @@ function buildModal($prefix, $title, $icon, $btnColor, $submitLabel, $strands_li
 <div class="modal-overlay" id="<?= $prefix ?>Modal">
     <div class="bg-white rounded-3xl shadow-2xl w-full max-w-lg mx-4 p-8 max-h-[90vh] overflow-y-auto">
 
-        <!-- Modal Header -->
+ 
         <div class="flex items-center justify-between mb-5">
             <div>
                 <h3 class="text-xl font-extrabold text-slate-800">
@@ -456,7 +452,7 @@ function buildModal($prefix, $title, $icon, $btnColor, $submitLabel, $strands_li
             </button>
         </div>
 
-        <!-- Level Picker -->
+
         <div class="mb-5">
             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Student Level *</label>
             <div class="grid grid-cols-2 gap-3">
@@ -485,14 +481,14 @@ function buildModal($prefix, $title, $icon, $btnColor, $submitLabel, $strands_li
             <input type="hidden" name="student_level" id="<?= $prefix ?>_level_hidden" value="highschool">
 
             <div class="grid grid-cols-2 gap-4">
-                <!-- Student ID -->
+      
                 <div class="col-span-2">
                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Student ID *</label>
                     <input type="text" name="student_id_val" id="<?= $prefix ?>_student_id"
                         class="field-input w-full px-4 py-2.5 border-2 border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-300 transition-all"
                         placeholder="e.g. 2024-001" required>
                 </div>
-                <!-- Full Name -->
+    
                 <div class="col-span-2">
                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Full Name *</label>
                     <input type="text" name="full_name" id="<?= $prefix ?>_full_name"
@@ -500,10 +496,10 @@ function buildModal($prefix, $title, $icon, $btnColor, $submitLabel, $strands_li
                         placeholder="Complete full name" required>
                 </div>
 
-                <!-- ── HIGH SCHOOL FIELDS ── -->
+             
                 <div id="<?= $prefix ?>_hs_fields" class="col-span-2 grid grid-cols-2 gap-4">
 
-                    <!-- Grade Level -->
+               
                     <div class="col-span-2">
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
                             <i class="fa-solid fa-list-ol mr-1 text-indigo-400"></i>Grade Level
@@ -520,7 +516,7 @@ function buildModal($prefix, $title, $icon, $btnColor, $submitLabel, $strands_li
                         </select>
                     </div>
 
-                    <!-- GRADE 7–11: Section only -->
+           
                     <div id="<?= $prefix ?>_g7_11_fields" class="col-span-2">
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
                             <i class="fa-solid fa-door-open mr-1 text-indigo-400"></i>Section
@@ -530,7 +526,7 @@ function buildModal($prefix, $title, $icon, $btnColor, $submitLabel, $strands_li
                             placeholder="e.g. Rizal">
                     </div>
 
-                    <!-- GRADE 11–12: Strand + Sub-section (Senior High School) -->
+  
                     <div id="<?= $prefix ?>_g12_fields" class="col-span-2 grid grid-cols-2 gap-4" style="display:none;">
                         <div class="col-span-2">
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
@@ -556,7 +552,7 @@ function buildModal($prefix, $title, $icon, $btnColor, $submitLabel, $strands_li
                     </div>
                 </div>
 
-                <!-- ── COLLEGE FIELDS ── -->
+         
                 <div id="<?= $prefix ?>_col_fields" class="col-span-2 grid grid-cols-2 gap-4" style="display:none;">
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Year Level</label>
@@ -583,7 +579,7 @@ function buildModal($prefix, $title, $icon, $btnColor, $submitLabel, $strands_li
                     </div>
                 </div>
 
-                <!-- Shared: School Year + Status -->
+          
                 <div>
                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">School Year</label>
                     <input type="text" name="school_year" id="<?= $prefix ?>_sy"
@@ -626,7 +622,7 @@ function buildModal($prefix, $title, $icon, $btnColor, $submitLabel, $strands_li
     </div>
 </div>
 
-<?php } // end buildModal
+<?php } 
 
 buildModal('add',  'Add Student',  'fa-user-plus',       'text-indigo-500', 'Add Student',   $strands_list);
 buildModal('edit', 'Edit Student', 'fa-pen-to-square',   'text-blue-500',   'Save Changes',  $strands_list);
