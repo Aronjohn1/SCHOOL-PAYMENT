@@ -49,7 +49,7 @@ $total_count = (int)$conn->query("
 $today_amount = (float)$conn->query("SELECT COALESCE(SUM(amount),0) as tot FROM transactions WHERE payment_date = CURDATE()")->fetch_assoc()['tot'];
 
 $payment_types = $conn->query("SELECT * FROM payment_types WHERE status='active' ORDER BY type_name");
-//  Color map
+
 $type_colors = [
     'Tuition Fee'       => ['bg'=>'#ede9fe','text'=>'#6d28d9','icon'=>'#7c3aed'],
     'Books & Materials' => ['bg'=>'#dbeafe','text'=>'#1d4ed8','icon'=>'#2563eb'],
@@ -110,7 +110,7 @@ tbody tr { transition: background 0.15s; }
 }
 </style>
 
-<!-- PRINT AREA (hidden on screen, shown on print) -->
+
 <div id="print-area" style="display:none;">
     <div style="border-bottom:2px solid #4f46e5; padding-bottom:14px; margin-bottom:20px;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
@@ -151,7 +151,7 @@ tbody tr { transition: background 0.15s; }
             </tr>
         </thead>
         <tbody id="print-tbody">
-            <!-- filled by JS before print -->
+ 
         </tbody>
         <tfoot>
             <tr style="background:#eef2ff; border-top:2px solid #4f46e5;">
@@ -169,7 +169,7 @@ tbody tr { transition: background 0.15s; }
 
 
 
-<!-- FILTER CARD  -->
+
 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 mb-5 fade-up2">
     <div class="flex items-center gap-2 mb-4">
         <i class="fa-solid fa-filter text-indigo-400"></i>
@@ -245,7 +245,7 @@ tbody tr { transition: background 0.15s; }
     </form>
 </div>
 
-<!--  TABLE CARD  -->
+
 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm fade-up3">
 
     <div class="flex items-center justify-between px-6 py-4 border-b border-slate-50">
